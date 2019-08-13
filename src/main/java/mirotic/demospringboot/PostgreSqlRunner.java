@@ -30,14 +30,14 @@ public class PostgreSqlRunner implements ApplicationRunner {
             log.debug("DataSource DriverName[{}]", dataSource.getConnection().getMetaData().getDriverName());
 
             Statement statement = connection.createStatement();
-            String dropSql = "DROP TABLE Account";
+            String dropSql = "DROP TABLE IF EXISTS member";
             statement.executeUpdate(dropSql);
 
-            String createSql = "CREATE TABLE Account(id INTEGER NOT NULL, name VARCHAR(50), PRIMARY KEY (id))";
+            String createSql = "CREATE TABLE member(id INTEGER NOT NULL, name VARCHAR(50), PRIMARY KEY (id))";
             statement.executeUpdate(createSql);
         }
 
-        String insertSql = "INSERT INTO Account VALUES(1, 'jupark')";
+        String insertSql = "INSERT INTO member VALUES(0, 'jupark')";
         jdbcTemplate.execute(insertSql);
     }
 }
